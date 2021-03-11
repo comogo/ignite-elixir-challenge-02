@@ -15,18 +15,18 @@ defmodule ListFilter do
   @spec call(list) :: non_neg_integer
   def call(list) do
     list
-    |> Enum.filter(&number?(&1))
-    |> Enum.map(&to_integer(&1))
-    |> Enum.filter(&odd?(&1))
+    |> Enum.filter(&odd_number?(&1))
     |> length()
   end
 
-  defp number?(str) do
-    String.match?(str, ~r(\A\d+$))
-  end
+  defp odd_number?(str) do
+    case Integer.parse(str) do
+      {number, ""} ->
+        odd?(number)
 
-  defp to_integer(str) do
-    String.to_integer(str)
+      _ ->
+        false
+    end
   end
 
   defp odd?(number) do

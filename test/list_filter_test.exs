@@ -30,5 +30,12 @@ defmodule ListFilterTest do
 
       assert result == expectation
     end
+
+    test "counting negative odd numbers" do
+      result = ListFilter.call(["2", "3foo", "-5", "79"])
+      expectation = 2
+
+      assert result == expectation
+    end
   end
 end
